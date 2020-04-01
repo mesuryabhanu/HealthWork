@@ -109,8 +109,8 @@ function initBotConversation() {
                             triggeredScenario: {
                                 trigger: "clinical_trials_matching_general",
                                 args: {
-                                    "country": "{user_country}",
-                                    "state": "{user_state}"
+                                    "country": "United States",
+                                    "state": "NY"
                                 }
                             }
                         }
