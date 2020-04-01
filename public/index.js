@@ -106,16 +106,13 @@ function initBotConversation() {
                             // must use for authenticated conversation.
                             jsonWebToken: jsonWebToken,
 
-                            // Use the following activity to proactively invoke a bot scenario
-                            /*
                             triggeredScenario: {
-                                trigger: "{scenario_id}",
+                                trigger: "clinical_trials_matching_general",
                                 args: {
-                                    myVar1: "{custom_arg_1}",
-                                    myVar2: "{custom_arg_2}"
+                                    "country": "{user_country}",
+                                    "state": "{user_state}"
                                 }
                             }
-                            */
                         }
                     }
                 }
