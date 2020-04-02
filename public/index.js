@@ -4,6 +4,7 @@ const localeRegExPattern = /^[a-z]{2}(-[A-Z]{2})?$/;
 function requestChatBot(loc) {
     const params = new URLSearchParams(location.search);
     const locale = params.has('locale') ? extractLocale(params.get('locale')) : defaultLocale;
+    alert(locale);
     const oReq = new XMLHttpRequest();
     oReq.addEventListener("load", initBotConversation);
     var path = "/chatBot?locale=" + locale;
