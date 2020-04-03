@@ -1,6 +1,8 @@
 const defaultLocale = 'en-US';
 const localeRegExPattern = /^[a-z]{2}(-[A-Z]{2})?$/;
 
+alert('hi');
+alert(getUrlParam('country', 'United States'));
 function requestChatBot(loc) {
     const params = new URLSearchParams(location.search);
     const locale = params.has('locale') ? extractLocale(params.get('locale')) : defaultLocale;
@@ -147,4 +149,12 @@ function initBotConversation() {
 function startChat(user, webchatOptions) {
     const botContainer = document.getElementById('webchat');
     window.WebChat.renderWebChat(webchatOptions, botContainer);
+}
+
+function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+        }
+    return urlparameter;
 }
