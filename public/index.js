@@ -1,15 +1,17 @@
 const defaultLocale = 'en-US';
+const defaultCountry = 'United States';
+const defaultState = 'NY';
 const localeRegExPattern = /^[a-z]{2}(-[A-Z]{2})?$/;
 
-alert('hi');
-alert(getUrlParam('country', 'United States'));
 function requestChatBot(loc) {
     const params = new URLSearchParams(location.search);
     const locale = params.has('locale') ? extractLocale(params.get('locale')) : defaultLocale;
-    alert(locale);
+    const country = params.has('country') ? params.get('country') : defaultCountry;
+    const state = params.has('state') ? params.get('state') : defaultState;
+	
     const oReq = new XMLHttpRequest();
     oReq.addEventListener("load", initBotConversation);
-    var path = "/chatBot?locale=" + locale;
+    var path = "/chatBot?locale=" + locale + "&country=" + country + "&state=" + state;
 
     if (loc) {
         path += "&lat=" + loc.lat + "&long=" + loc.long;
@@ -75,7 +77,9 @@ function initBotConversation() {
     const user = {
         id: tokenPayload.userId,
         name: tokenPayload.userName,
-        locale: tokenPayload.locale
+        locale: tokenPayload.locale,
+		country: tokenPayload.country,
+		state: tokenPayload.state
     };
     let domain = undefined;
     if (tokenPayload.directLineURI) {
@@ -112,8 +116,8 @@ function initBotConversation() {
                             triggeredScenario: {
                                 trigger: "clinical_trials_matching_general",
                                 args: {
-                                    "country": "United States",
-                                    "state": "NY"
+                                    "country": user.country, //"United States",
+                                    "state": user.state // "NY"
                                 }
                             }
                         }
@@ -141,7 +145,9 @@ function initBotConversation() {
         store: store,
         userID: user.id,
         username: user.name,
-        locale: user.locale
+        locale: user.locale,
+		country: user.country,
+		state: user.state
     };
     startChat(user, webchatOptions);
 }
@@ -162,7 +168,7 @@ function getUrlParam(parameter, defaultvalue){
 function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
+        vars[key.toLowerCase()] = value;
     });
     return vars;
 }
