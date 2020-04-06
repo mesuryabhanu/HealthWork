@@ -98,6 +98,9 @@ app.post('/chatBot',  function(req, res) {
             response['userName'] = req.query.userName;
             response['locale'] = getValidatedLocale(req.query.locale);
             response['connectorToken'] = parsedBody.token;
+            response['userName'] = req.query.userName;
+            response['country'] = req.query.country;
+            response['state'] = req.query.state;
 
             /*
             //Add any additional attributes

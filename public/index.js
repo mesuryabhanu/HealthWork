@@ -1,6 +1,6 @@
 const defaultLocale = 'en-US';
 const defaultCountry = 'United States';
-const defaultState = 'NY';
+const defaultState = '';
 const localeRegExPattern = /^[a-z]{2}(-[A-Z]{2})?$/;
 
 function requestChatBot(loc) {
